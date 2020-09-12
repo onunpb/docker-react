@@ -1,0 +1,10 @@
+language: generic
+udo: required
+services:
+    - docker
+
+before_install:
+    - docker build -t napbarros/docker-react -f Dockerfile.dev .
+
+script:
+    - docker run -e CI=true napbarros/docker-react npm run test 
