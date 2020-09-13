@@ -8,3 +8,16 @@ before_install:
 
 script:
     - docker run -e CI=true napbarros/docker-react npm run test 
+
+deploy:
+    provider: elasticbeanstalk   
+    region: "us-west-2"  # AWS endpoint: Docker-env.qbtbvwcxmh.us-west-2.elasticbeanstakl.com
+    app: "docker" # AWS app name
+    env: "Docker-env" # AWS environment name
+    bucket_name: "elasticbeanstakl-us-west-2-306476627547" # Example AWS bucket name
+    bucket_path: "docker" # Equals the app name by default in the first deployment
+    on:
+        branch: master
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key:
+        secure: "$AWS_SECRET_KEY"
